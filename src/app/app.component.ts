@@ -8,8 +8,23 @@ import { InfoPaginaService } from './services/info-pagina.service';
 })
 export class AppComponent {
 
+  cargando = true;
+
+
+
   constructor(public infoPaginaService: InfoPaginaService) {
+  this.tiempoCarga();
 
   }
+
+  tiempoCarga(){
+    
+    setTimeout(() => {
+      this.cargando = false;
+    }, 2000);
+
+  }
+
+
 
 }

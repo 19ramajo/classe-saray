@@ -8,3 +8,5 @@ export interface InfoPagina {
   facebook?: string;
   equipo_trabajo?: any[];
 }
+
+
