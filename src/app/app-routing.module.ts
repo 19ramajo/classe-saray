@@ -13,13 +13,13 @@ import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes: Routes = [
     {path: 'login', component: LoginComponent},
-    {path: 'home', component: PortafolioComponent, canActivate: [AuthGuard]},
+    {path: 'home', component: PortafolioComponent, canActivate: [AuthGuard] },
     {path: 'registro', component: RegistroComponent},
     {path: 'about', component: AboutComponent, canActivate: [AuthGuard]},
     {path: 'item', component: ItemComponent, canActivate: [AuthGuard]},
     {path: 'notas', component: NotasComponent, canActivate: [AuthGuard]},
     {path: 'search/:termino', component: SearchComponent, canActivate: [AuthGuard]},
-    {path: '', component: LoginComponent},
+    {path: '', component: LoginComponent },
     {path: '**', pathMatch: 'full', redirectTo: 'login'}
 ];
 

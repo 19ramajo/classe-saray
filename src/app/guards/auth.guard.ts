@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
   constructor(private loginService: LoginService, public appRouting: Router){}
 
   canActivate(){
-    if (this.loginService.getCurrentUser()){
+    if (localStorage.getItem('User')){
       return true;
     }else {
       this.appRouting.navigate(['login']);

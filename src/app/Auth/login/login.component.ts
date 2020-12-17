@@ -52,7 +52,6 @@ export class LoginComponent implements OnInit {
     const {email, password} =  this.LoginForm.value;
     this.loginservice.login(email, password);
     this.loginservice.authenticated();
-    alert('Login Correcto');
     this.appRouting.navigate(['home']);
   }
 
