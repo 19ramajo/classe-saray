@@ -14,7 +14,7 @@
     <div class="ae-container-fluid rk-topbar">
         <h1 class="rk-logo"><a routerLink="home">{{ infoPaginaService.info.titulo }}<sup>tm</sup></a></h1>
         <nav class="rk-navigation">
-            <ul class="rk-menu">
+            <ul class="rk-menu" *ngIf="user$ |async">
                 <li routerLinkActive="active" class=" rk-menu__item"><a routerLink="home" class="rk-menu__link">Home</a>
                 </li>
                 <li class="rk-menu__item"><a href="blog.html" class="rk-menu__link">Blog</a>
@@ -28,6 +28,13 @@
                     </nav>
                 </li>
                 <li routerLinkActive="active" class="rk-menu__item"><a routerLink="about" class="rk-menu__link">Sobre nosotros</a>
+                </li>
+                <li class="rk-menu__item"><a class="rk-menu__link" href="#" *ngIf="user$ |async as user">{{user?.email}}</a>
+                    <nav class="rk-menu__sub">
+                        <ul class="rk-container">
+                            <li class="rk-menu__item"><a routerLink="" (click)="logout()" class="rk-menu__link">Logout</a></li>
+                        </ul>
+                    </nav>
                 </li>
             </ul>
             <div class="rk-search">

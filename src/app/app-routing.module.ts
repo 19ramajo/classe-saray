@@ -5,19 +5,28 @@ import { AboutComponent } from './pages/about/about.component';
 import { ItemComponent } from './pages/item/item.component';
 import { NotasComponent } from './pages/notas/notas.component';
 import { SearchComponent } from './pages/search/search.component';
+import { LoginComponent } from './Auth/login/login.component';
+import { RegistroComponent } from './Auth/registro/registro.component';
+import { AuthGuard } from './guards/auth.guard';
 
-const app_routes: Routes = [
-    {path: 'home', component: PortafolioComponent},
-    {path: 'about', component: AboutComponent},
-    {path: 'item', component: ItemComponent},
-    {path: 'notas', component: NotasComponent},
-    {path: 'search/:termino', component: SearchComponent},
-    {path: '**', pathMatch: 'full', redirectTo: 'home'}
+
+
+const appRoutes: Routes = [
+    {path: 'login', component: LoginComponent},
+    {path: 'home', component: PortafolioComponent, canActivate: [AuthGuard]},
+    {path: 'registro', component: RegistroComponent},
+    {path: 'about', component: AboutComponent, canActivate: [AuthGuard]},
+    {path: 'item', component: ItemComponent, canActivate: [AuthGuard]},
+    {path: 'notas', component: NotasComponent, canActivate: [AuthGuard]},
+    {path: 'search/:termino', component: SearchComponent, canActivate: [AuthGuard]},
+    {path: '', component: LoginComponent},
+    {path: '**', pathMatch: 'full', redirectTo: 'login'}
 ];
+
 
 @NgModule({
     imports: [
-        RouterModule.forRoot( app_routes, {useHash: true} )
+        RouterModule.forRoot( appRoutes, {useHash: true} )
     ],
     exports: [
         RouterModule

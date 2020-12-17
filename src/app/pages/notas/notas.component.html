@@ -1,28 +1,33 @@
-<div class="ae-grid au-xs-ta-center au-mb-6">
+<form method="get" action="javascript: void(0);" id="login-form" class="login-form" autocomplete="off" role="main">
+    <div class="ae-grid au-xs-ta-center au-mb-6">
 
-    <div class="col-md-4">
-        <h2>Listado de notas:</h2>
-        <div *ngFor="let nota of infoService.notas" (click)="viewNotes(nota)" class="animated jackInTheBox ae-grid__item item-lg-4 ae-kappa au-mb-3">
-            <h5 class="ae-u-bolder au-mt-2">{{nota.Titulo}}</h5>
+        <div class="col-md-4">
+            <h2>Listado de notas:</h2>
+            <div *ngFor="let nota of infoService.notas" (click)="viewNotes(nota)" class="animated jackInTheBox ae-grid__item item-lg-4 ae-kappa au-mb-3">
+                <h5 class="ae-u-bolder au-mt-2">{{nota.Titulo}}</h5>
+            </div>
+            <input class="Button" type="submit" (click)="addNote()" value="Nueva Nota" />
         </div>
-        <a class="btn" (click)="addNote()">Nueva Nota</a>
+
+        <div class="col-md-4" *ngIf="showForm">
+
+            <input class="form-control" type="text" placeholder="Titulo de la nota" name="titulo" [(ngModel)]="note.Titulo" />
+            <br/>
+            <textarea class="from-control" placeholder="Cuerpo de la nota..." name="descripcion" [(ngModel)]="note.Descripcion"></textarea>
+            <hr/>
+            <div class="ae-grid ae-grid--collapse">
+                <div class="col-md-4">
+                    <input type="submit" class="Button" (click)="cancel()" value="Cancelar" />
+                </div>
+                <div class="col-md-4">
+                    <input type="submit" class="Button" (click)="createNote()" value="Guardar Nota" />
+                </div>
+                <div class="col-md-4" *ngIf="editing">
+                    <input type="submit" class="Button" (click)="deleteNote()" value="Eliminar Nota" />
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <div class="col-md-4" *ngIf="show_form">
-
-        <input class="form-control" type="text" placeholder="Titulo de la nota" [(ngModel)]="note.Titulo" />
-        <br/>
-        <textarea class="from-control" placeholder="Cuerpo de la nota..." [(ngModel)]="note.Descripcion"></textarea>
-        <hr/>
-        <div class="ae-grid ae-grid--collapse">
-            <div class="col-md-4">
-                <a class="btn" (click)="cancel()">Cancelar</a>
-            </div>
-            <div class="col-md-4">
-                <a class="btn" (click)="createNote()">Guardar Nota</a>
-            </div>
-            <div class="col-md-4" *ngIf="editing">
-                <a class="btn" (click)="deleteNote()">Eliminar Nota</a>
-            </div>
-        </div>
-    </div>
+</form>

@@ -1,0 +1,41 @@
+<form [formGroup]="LoginForm" (ngSubmit)="onLogin()" action="javascript: void(0);" id="login-form" class="login-form" autocomplete="off" role="main">
+    <h1 class="a11y-hidden">Login Form</h1>
+    <div>
+        <label class="label-email">
+        <input type="email" class="text" formControlName="email" name="email" placeholder="Email" tabindex="1" required />
+        <span class="required">Email</span>
+      </label>
+    </div>
+    <input type="checkbox" name="show-password" class="show-password a11y-hidden" id="show-password" tabindex="3" />
+    <label class="label-show-password" for="show-password">
+      <span>Show Password</span>
+    </label>
+    <div>
+        <label class="label-password">
+        <input type="text" class="text" formControlName="password" name="password" placeholder="Password" tabindex="2" required />
+        <span class="required">Password</span>
+      </label>
+    </div>
+    <input type="submit" value="Log In" class="Button" />
+    <input type="submitGoogle" value="Google" class="Button" (click)="onGoogleLogin()" />
+    <div class="email">
+        <p class="text-registro">
+            ¿Aun no estas registrado? <a class="btn-registro" [routerLink]="['/registro']"> Registrate </a>
+        </p>
+        <p>
+            <a class="btn-pass" [routerLink]="['/forgot-password']"> He olvidado mi contraseña </a>
+        </p>
+    </div>
+    <!--<figure aria-hidden="true">
+        <div class="person-body"></div>
+        <div class="neck skin"></div>
+        <div class="head skin">
+            <div class="eyes"></div>
+            <div class="mouth"></div>
+        </div>
+        <div class="hair"></div>
+        <div class="ears"></div>
+        <div class="shirt-1"></div>
+        <div class="shirt-2"></div>
+    </figure> -->
+</form>

@@ -11,10 +11,10 @@ export class SearchComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-  
+
   this.route.params
   .subscribe( params => {
-    console.log(params['termino']);
+    console.log(params[' termino ']);
 
   })
 

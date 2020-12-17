@@ -12,57 +12,61 @@ import { InfoPaginaService } from '../../services/info-pagina.service';
 })
 export class NotasComponent implements OnInit {
 
-  constructor(public infoService: InfoPaginaService) { }
+  myNotes = this.infoService.notas;
+
+  note = {Id:null, Titulo:null, Descripcion:null, User:null};
+  showForm =false;
+  editing = false;
+
+  constructor(public infoService: InfoPaginaService) {
+   }
 
   ngOnInit() {
+    this.infoService.cargarNotas();
   }
 
-  my_notes = this.infoService.notas;
-  
-  note = {Id:null, Titulo:null, Descripcion:null};
-  show_form =false;
-  editing = false;
-  
+
   addNote(){
     this.editing = false,
-    this.show_form = true;
-    this.note = {Id:null, Titulo:null, Descripcion:null};
+    this.showForm = true;
+    this.note = {Id:null, Titulo:null, Descripcion:null, User:null};
   }
 
   cancel(){
-    this.show_form = false;
-    this.note = {Id:null, Titulo:null, Descripcion:null};
+    this.showForm = false;
+    this.note = {Id:null, Titulo:null, Descripcion:null, User:null};
     this.editing = false;
   }
 
   createNote(){
     if(this.editing){
       alert('¿Esta seguro que desea editar esta nota?');
-      var me = this;
+      const me = this;
       this.infoService.EditarNotas(this.note);
-      me.show_form = false;
+      me.showForm = false;
       this.editing = false;
-      this.note = {Id:null, Titulo:null, Descripcion:null};
+      this.note = {Id:null, Titulo:null, Descripcion:null, User:null};
     }else{
       this.note.Id = Date.now();
+      this.note.User = localStorage.getItem('User');
       this.infoService.insertarNotas(this.note);
-      this.show_form = false;
-      this.note = {Id:null, Titulo:null, Descripcion:null};
+      this.showForm = false;
+      this.note = {Id:null, Titulo:null, Descripcion:null, User:null};
     }
-    
+
   }
 
   viewNotes(nota){
     this.editing = true;
     this.note = nota;
-    this.show_form = true;
+    this.showForm = true;
   }
 
   deleteNote(){
     this.infoService.borrarNotas(this.note);
-    var me = this;
-    me.show_form = false;
-    this.note = {Id:null, Titulo:null, Descripcion:null};
+    const me = this;
+    me.showForm = false;
+    this.note = {Id:null, Titulo:null, Descripcion:null, User:null};
   }
 
 

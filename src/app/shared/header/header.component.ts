@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { InfoPaginaService } from '../../services/info-pagina.service';
+import { environment } from '../../../environments/environment';
+import { LoginService } from '../../services/login.service';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-header',
@@ -9,10 +13,14 @@ import { InfoPaginaService } from '../../services/info-pagina.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor( public infoPaginaService: InfoPaginaService,
-              private router: Router) {}
+  // public user = null;
+  public user$: Observable<any> = this.loginService.afAuth.user;
 
-  ngOnInit() {
+  constructor( public infoPaginaService: InfoPaginaService,
+                public loginService: LoginService,
+              private appRouting: Router) {}
+
+   ngOnInit() {
   }
 
   buscarProducto( termino: string ) {
@@ -20,9 +28,15 @@ export class HeaderComponent implements OnInit {
     if( termino.length < 1){
       return;
     }else{
-      this.router.navigate(['/search', termino]);
+      this.appRouting.navigate(['/search', termino]);
     }
- 
+  }
+
+  logout(){
+    this.loginService.logout();
+    localStorage.setItem('User', 'null');
+    this.appRouting.navigate(['/login']);
+
   }
 
 }

@@ -130,3 +130,7 @@
     svg rect {
         fill: black;
     }
+    
+    .Button {
+        cursor: pointer;
+    }

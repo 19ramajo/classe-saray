@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -19,16 +19,12 @@ import { SearchComponent } from './pages/search/search.component';
 import { AngularFireModule} from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule} from 'angularfire2/auth';
+import { LoginService } from './services/login.service';
+import { LoginComponent } from './Auth/login/login.component';
+import { RegistroComponent } from './Auth/registro/registro.component';
+import { environment } from '../environments/firebase';
 
 
-
-export const firebaseConfig = {
-  apiKey: "AIzaSyCfZXPqWZjp1URP1v8dd9MYPklqi0EVc70",
-  authDomain: "angular-classesaray.firebaseapp.com",
-  databaseURL: "https://angular-classesaray.firebaseio.com",
-  storageBucket: "angular-classesaray.appspot.com",
-  messagingSenderId: 'G-6230M8YXRX'
-};
 
 @NgModule({
   declarations: [
@@ -39,18 +35,21 @@ export const firebaseConfig = {
     AboutComponent,
     ItemComponent,
     NotasComponent,
-    SearchComponent
+    SearchComponent,
+    LoginComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
