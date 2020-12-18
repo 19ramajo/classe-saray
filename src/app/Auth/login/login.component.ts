@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(public loginservice: LoginService, public appRouting: Router) {
     if ( localStorage.getItem('User') !== 'null' ){
-      this.appRouting.navigate(['home']);
+      this.appRouting.navigate(['/home']);
     }
 
   }
@@ -39,11 +39,16 @@ export class LoginComponent implements OnInit {
     this.loginservice.loginGoogle()
       .then((data)=>{
         this.loginservice.authenticated();
-        this.appRouting.navigate(['/home']);
+        if (localStorage.getItem('User')){
+          this.appRouting.navigate(['/home']);
+        }else{
+          alert('Ha ocurrido un error en el login');
+          this.appRouting.navigate(['/login']);
+        }
+
       })
       .catch((error)=>{
         console.log(error);
-        alert('Ha ocurrido un error en el login');
       })
   }
 
@@ -52,7 +57,13 @@ export class LoginComponent implements OnInit {
     const {email, password} =  this.LoginForm.value;
     this.loginservice.login(email, password);
     this.loginservice.authenticated();
-    this.appRouting.navigate(['home']);
+    if (localStorage.getItem('User')){
+      this.appRouting.navigate(['/home']);
+    } else {
+      alert('Error de autentificacon');
+      this.appRouting.navigate(['/login']);
+    }
+
   }
 
 
